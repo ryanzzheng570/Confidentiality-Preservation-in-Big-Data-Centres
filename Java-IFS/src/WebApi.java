@@ -8,19 +8,19 @@ import java.net.Socket;
 public class WebApi {
 	 public static void main(String[] args) {
 	        ServerSocket server;
-	        Socket client;
+	        Socket nodeServer;
 	        InputStream input;
 
 	        try {
 	            server = new ServerSocket(1010);
-	            client = server.accept();
+	            nodeServer = server.accept();
 
-	            input = client.getInputStream();
+	            input = nodeServer.getInputStream();
 	            String inputString = WebApi.inputStreamAsString(input);
 
 	            System.out.println(inputString);
 
-	            client.close();
+	            nodeServer.close();
 	            server.close();
 	        }
 	        catch (Exception e) {
