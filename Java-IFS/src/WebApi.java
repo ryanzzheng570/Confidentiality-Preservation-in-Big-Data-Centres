@@ -6,13 +6,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class WebApi {
+	final static int port = 1010;
+	
 	 public static void main(String[] args) {
+		 
 	        ServerSocket server;
 	        Socket nodeServer;
 	        InputStream input;
 
 	        try {
-	            server = new ServerSocket(1010);
+	            server = new ServerSocket(port);
 	            nodeServer = server.accept();
 
 	            input = nodeServer.getInputStream();
