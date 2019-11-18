@@ -5,6 +5,9 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 public class WebApi {
 	final static int port = 1010;
 	
@@ -19,9 +22,15 @@ public class WebApi {
 	            nodeServer = server.accept();
 
 	            input = nodeServer.getInputStream();
+	            
+	            JSONParser jsonParser = new JSONParser();
+	            
+	            JSONObject jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(input, "UTF-8"));
+	            
+	            
 	            String inputString = WebApi.inputStreamAsString(input);
 
-	            System.out.println(inputString);
+	            System.out.println(jsonObject.toString());
 
 	            nodeServer.close();
 	            server.close();

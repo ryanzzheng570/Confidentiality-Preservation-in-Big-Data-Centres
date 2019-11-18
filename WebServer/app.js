@@ -20,5 +20,11 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.listen(port, () => console.log(`Server running at http://${hostname}:${port}/`));
 
 const IFS = net.connect(1010, 'localhost');
-IFS.write('Test msg from node');
+
+var jsonObject = JSON.stringify({
+    message: "testing json",
+    m2: "message2"
+});
+
+IFS.write(jsonObject);
 IFS.end();
