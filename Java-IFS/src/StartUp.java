@@ -1,10 +1,13 @@
 
 public class StartUp {
-
+	
+	private static boolean isDBConnected = false;
 	public static void main(String[] args) throws Exception {
-		MySQLAccess connection = new MySQLAccess();
-		connection.readDataBase();
-
+		SQLWrapper connection = new SQLWrapper();
+		isDBConnected = connection.tryConnection();
+		if(isDBConnected) {
+			
+		}
 	}
 
 }
