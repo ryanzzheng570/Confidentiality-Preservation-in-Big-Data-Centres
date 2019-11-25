@@ -1,3 +1,4 @@
+package api;
 // Adapted from http://www.vogella.com/tutorials/MySQLJava/article.html
 import java.sql.Connection;
 import java.sql.DriverManager;
