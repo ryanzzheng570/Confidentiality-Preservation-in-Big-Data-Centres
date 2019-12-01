@@ -5,9 +5,13 @@
             #login {
                 position: absolute;
                 top: 50%;
-                left: 50%;
+                left: 45%;
                 background-color: lightgray;
                 padding: 50px;
+            }
+            #submit {
+                float: right;
+                margin-top: 20px;
             }
         </style>
         <meta charset="UTF-8">
@@ -17,13 +21,18 @@
     <body>
         <div id="login">
             <form method="post">
-                <label for="username">Username</label>
-                <input type="text" name="username" required>
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" required>
+                </div>
+                
                 <br/>
-                <label for="password">Password</label>
-                <input type="password" name="password" required>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" required>
+                </div>
                 <br/>
-                <button type="submit">Submit</button>
+                <button id="submit" type="submit">Submit</button>
              </form>
         </div>
     </body>
