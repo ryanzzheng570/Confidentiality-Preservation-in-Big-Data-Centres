@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class WebApi {
+public class WebApi{
 
 	// port number
 	private final static int port = 1010;
@@ -38,10 +38,12 @@ public class WebApi {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		listen();
 
 	}
 
-	public JSONObject receiveFromWeb() {
+	public JSONObject listen() {
 
 		try {
 			System.out.println("Waiting for client Request");
@@ -67,6 +69,7 @@ public class WebApi {
 
 
 	}
+	
 
 	public boolean sendToWeb(JSONObject obj) {
 
@@ -82,6 +85,7 @@ public class WebApi {
 			//write to outputstream
 			output.write(message);
 			System.out.println("Sent: " + obj.toString());
+			output.flush();
 
 			nodeServer.close();
 			output.close();
@@ -109,5 +113,7 @@ public class WebApi {
 		br.close();
 		return sb.toString();
 	}
+
+
 
 }
