@@ -64,16 +64,6 @@ public class WebApi{
 		} 
 	}
 	
-	public void setJSONObject(JSONObject obj) {
-		this.obj = obj;
-		
-	}
-	
-	public JSONObject receiveFromWeb() {
-		return obj;
-	}
-	
-
 	public boolean sendToWeb(JSONObject obj) {
 
 		try {
@@ -104,6 +94,16 @@ public class WebApi{
 	}
 
 
+	public void setJSONObject(JSONObject obj) {
+		this.obj = obj;
+		
+	}
+	
+	public JSONObject receiveFromWeb() {
+		return obj;
+	}
+	
+	
 	public static String inputStreamAsString(InputStream stream) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 		StringBuilder sb = new StringBuilder();
