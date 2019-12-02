@@ -16,6 +16,10 @@ public class Coordinator {
 	
 	
 	public Coordinator() {
+		
+	}
+	
+	private void start() {
 		//initialize sql wrapper
 		db = new SQLWrapper();
 		try {
@@ -55,6 +59,12 @@ public class Coordinator {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static void main(String args[]) {
+		
+		Coordinator coord = new Coordinator();
+		coord.start();
 	}
 	
 	
