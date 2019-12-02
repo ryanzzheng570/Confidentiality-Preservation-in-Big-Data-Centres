@@ -18,23 +18,30 @@ public class ServerClientThread implements Runnable {
 	}
 
 	public void run() {
+		while(true) {
+			listen();
+		}
+	}
+	
+	public void listen() {
 		try {
 
 			System.out.println("Waiting for client Request");			
 			InputStream input= nodeServer.getInputStream();
 
-			while (true) {
+			while (input!=null) {
 				// parse to JSON
 				JSONParser jsonParser = new JSONParser();
 				JSONObject jsonObject = (JSONObject) jsonParser.parse(new InputStreamReader(input, "UTF-8"));
 
 				System.out.println("Request Received: " + jsonObject.toString());
 				web.setJSONObject(jsonObject);
-				input.close();
-				nodeServer.close();
+				
 				
 			}
 			
+			input.close();
+			nodeServer.close();
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
