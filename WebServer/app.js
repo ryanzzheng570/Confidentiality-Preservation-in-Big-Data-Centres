@@ -13,6 +13,8 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/pages/login.html
 /* Search page*/
 app.get('/search', (req, res) => res.sendFile(path.join(__dirname + '/pages/search.html')));
 
+/* Admin page */
+app.get('/admin', (req, res) => res.sendFile(path.join(__dirname + '/pages/admin.html')));
 
 app.listen(port, () => console.log(`Server running at http://${hostname}:${port}/`));
 
