@@ -21,19 +21,23 @@ public class WebApi{
 	private static ServerSocket server;
 
 	// static webServer variable
-	private static Socket nodeServer;
+	private static Socket serverClient;
 
 	// input variable
 	private InputStream input;
 
 	// output var
 	private OutputStream output;
+	
+	//JSON object
+	private JSONObject obj;
 
 	public WebApi() {
 		// create socket server object
 		try {
+			obj = null;
 			server = new ServerSocket(port);
-
+			System.out.println("Server started...");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,31 +47,30 @@ public class WebApi{
 
 	}
 
-	public JSONObject listen() {
+	public void listen() {
 
 		try {
-			System.out.println("Waiting for client Request");
 			// create socket and get socket request
-			nodeServer = server.accept();
-			// read from socket
-			input = nodeServer.getInputStream();
-			// parse to JSON
-			JSONParser jsonParser = new JSONParser();
-			JSONObject jsonObject = (JSONObject) jsonParser.parse(new InputStreamReader(input, "UTF-8"));
+			serverClient = server.accept();
+			System.out.println("Client server connected");
+			//start new Client thread
+			ServerClientThread sct = new ServerClientThread(serverClient, this);
+			sct.run();
 
-			System.out.println("Request Received: " + jsonObject.toString());
-
-			nodeServer.close();
-			input.close();
-			return jsonObject;
-
-		} catch (IOException|ParseException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
+			
 		} 
-
-
+	}
+	
+	public void setJSONObject(JSONObject obj) {
+		this.obj = obj;
+		
+	}
+	
+	public JSONObject receiveFromWeb() {
+		return obj;
 	}
 	
 
@@ -76,9 +79,9 @@ public class WebApi{
 		try {
 			System.out.println("Sending to Web..");
 			// create socket and get socket request
-			nodeServer = server.accept();
+			serverClient = server.accept();
 			//get output stream
-			output = nodeServer.getOutputStream();
+			output = serverClient.getOutputStream();
 			//get bytes
 			byte[] message = obj.toString().getBytes();
 			System.out.println("Sending...");
@@ -87,7 +90,7 @@ public class WebApi{
 			System.out.println("Sent: " + obj.toString());
 			output.flush();
 
-			nodeServer.close();
+			serverClient.close();
 			output.close();
 			return true;
 			
